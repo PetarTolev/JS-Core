@@ -1,13 +1,9 @@
 function solve(input){
     let resultArr = [];
 
-    for (let i = 0; i < input.length; i+2) {
+    for (let i = 1; i <= input.length; i+=2) {
         resultArr.push(input[i] * 2);
-        
     }
 
-    console.log(resultArr);
-    
+    console.log (resultArr.reverse());
 }
-
-solve([10, 15, 20, 25]);
