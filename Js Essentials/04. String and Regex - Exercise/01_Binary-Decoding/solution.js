@@ -18,9 +18,6 @@ function solve() {
 	splittedNums.splice(0, sum);
 	splittedNums.splice(splittedNums.length - sum, splittedNums.length);
 
-console.log(splittedNums.length);
-
-
 	let newString = splittedNums.join('');
 
 	let result = '';
