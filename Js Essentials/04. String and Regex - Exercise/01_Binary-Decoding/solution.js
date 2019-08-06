@@ -12,7 +12,6 @@ function solve() {
 		let remainder = sum % 10;
 		sum = parseInt(sum / 10);
 		sum += remainder;
-
 	}
 
 	splittedNums.splice(0, sum);
