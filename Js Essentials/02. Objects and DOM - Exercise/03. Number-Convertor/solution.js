@@ -1,15 +1,32 @@
 function solve() {
-    let selectMenuElement = document.getElementById('selectMenuTo');
-    selectMenuElement[0].value = 'Binary';
+    let options = ['Binary', 'Hexadecimal'];
 
-    console.log(selectMenuElement);
-    
+    let menuTo = document.getElementById('selectMenuTo');
 
-    let opt = document.createElement('option');
-    let optBinary = document.createTextNode('Binary');
+    for (let i = 0; i < options.length; i++) {
+        let option = document.createElement('option');
+        option.setAttribute('value', options[i])
+        option.text = options[i];
+        menuTo.appendChild(option);
+    }
 
+    function convert() {
+        let number = document.getElementById('input').value;
+        let resultElement = document.getElementById('result');
 
-    opt.appendChild(optBinary);
+        let numberSystem = menuTo.value;
+        let resultValue;
 
-    selectMenuElement.appendChild(opt);
+        if (numberSystem === 'Hexadecimal') {
+            resultValue = (+number).toString(16).toUpperCase();
+        }
+        else if (numberSystem === 'Binary') {
+            resultValue = (+number).toString(2);
+        }
+
+        resultElement.value = resultValue;
+    }
+
+    let button = document.getElementsByTagName('button')[0];
+    button.addEventListener('click', convert);
 }
