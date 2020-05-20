@@ -11,7 +11,8 @@ function addItem() {
 
 function addDeleteButton(element) {
     let a = document.createElement('a');
-    a.setAttribute('href', 'javascript:;');
+    a.setAttribute('href', '#');
+    a.
     a.appendChild(document.createTextNode('[Delete]'));
     element.appendChild(a);    
 
