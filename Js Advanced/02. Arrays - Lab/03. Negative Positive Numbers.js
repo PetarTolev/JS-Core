@@ -1,10 +1,9 @@
-function solve(input){
-    for (let i = 0; i < input.length; i++) {
-        if (input[i] < 0) {
-            let removed = input.splice(i, 1);
-            input.unshift(removed);
+function sortNums(arr) {
+    arr.reduce((acc, current, index, a) => {
+        if (current < 0) {
+            a.unshift(+a.splice(index, 1))
         }
-    }
+    }, 0);
 
-    console.log(input.join('\n'));   
+    console.log(arr.join('\n'));
 }

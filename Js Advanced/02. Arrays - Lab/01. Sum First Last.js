@@ -1,8 +1,6 @@
-function solve(input) {
-    let sum = 0;
+function SumFirstAndLast(arr) {
+    let a = +arr[0];
+    let b = +arr[arr.length - 1]
 
-    sum += Number(input[0]);
-    sum += Number(input[input.length - 1]);
-
-    console.log(sum);   
+    return a + b;
 }
