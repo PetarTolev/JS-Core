@@ -1,11 +1,9 @@
-function solve(input) {
-    let rotationNum = Number(input.pop()) % input.length;
+function rotate(arr) {
+    let n = +arr.pop();
 
-    for (let i = 0; i < rotationNum; i++) {
-        let a = input.pop();
-        input.unshift(a);
-        
+    for (let i = 0; i < n; i++) {
+        arr.unshift(arr.pop());
     }
 
-    console.log(input.join(' '));
+    return arr.join(' ');
 }

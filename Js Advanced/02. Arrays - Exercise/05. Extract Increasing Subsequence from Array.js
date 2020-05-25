@@ -1,10 +1,10 @@
-function solve(input) {
-    let n = Number.MIN_SAFE_INTEGER;
-
-    for (const num of input) {
-        if (Number(num) >= n) {
-            console.log(num);
-            n = Number(num);
+function extractIncreasing(arr) {
+    for (let i = 0; i <= arr.length; i++) {
+        if (arr[i] < arr[i - 1]) {
+            arr.splice(i, 1)
+            i--;
         }
     }
+    
+    return arr.join('\n');
 }

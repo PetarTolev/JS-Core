@@ -1,7 +1,6 @@
-function solve(input) {
-    input.sort((a, b) => {
-        return a.length - b.length || a.localeCompare(b);
-    })
-
-    console.log(input.join('\n'));
+function sortArray(arr) {
+    return arr.sort((a, b) =>
+        a.length - b.length || a.localeCompare(b)
+    )
+    .join('\n');
 }

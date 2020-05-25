@@ -1,7 +1,9 @@
-function solve(input){
-    let step = Number(input.pop());
+function printNthElement(arr) {
+    let n = arr.splice(arr.length - 1);
 
-    for (let i = 0; i < input.length; i+=step) {
-        console.log(input[i]);   
-    }
+    return arr
+        .filter((el, index) => {
+            return index % n === 0;
+        })
+        .join('\n')
 }
