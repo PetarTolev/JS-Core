@@ -8,7 +8,7 @@ function solve(input){
                 number /= 2;
                 break;
             case "dice":
-                number = Math.sqrt(number); //not sure
+                number = Math.sqrt(number);
                 break;
             case "spice":
                 number += 1;
