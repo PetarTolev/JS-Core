@@ -1,7 +1,8 @@
 function diagonaSum(arr) {
     return arr.reduce((acc, current, index) => {
-        acc.d1 += current[index];
-        acc.d2 += current[arr.length - index - 1];
+        acc[0] += current[index];
+        acc[1] += current[arr.length - index - 1];
         return acc;
-    }, { d1: 0, d2: 0 })
+    }, [0, 0])
+    .join(' ');
 }

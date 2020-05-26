@@ -1,6 +1,6 @@
 function evenPositionElement(arr) {
     return arr
-        .filter((el, index) => {
+        .filter((_, index) => {
             return index % 2 === 0;
         })
         .join(' ');

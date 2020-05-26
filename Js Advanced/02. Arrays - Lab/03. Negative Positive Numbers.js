@@ -1,5 +1,5 @@
 function sortNums(arr) {
-    arr.reduce((acc, current, index, a) => {
+    arr.reduce((_, current, index, a) => {
         if (current < 0) {
             a.unshift(+a.splice(index, 1))
         }
