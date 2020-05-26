@@ -1,8 +1,8 @@
 function printNthElement(arr) {
-    let n = arr.splice(arr.length - 1);
+    let n = arr.pop();
 
     return arr
-        .filter((el, index) => {
+        .filter((_, index) => {
             return index % n === 0;
         })
         .join('\n')
