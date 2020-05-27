@@ -7,3 +7,22 @@ function equalNeighbors(matrix) {
         }, 0);
     }, 0)
 }
+
+function equalNeighbors2(matrix) {
+    function intersectVertical(a, b) {
+        return a.filter((el, index) => (b || [])[index] === el).length;
+    }
+
+    function intersectHorizontal (a) {
+        return a.filter((el, index, arr) => el === arr[index + 1]).length;
+    }
+
+    let result = 0;
+
+    for (let i = 0; i < matrix.length; i++) {
+        result += intersectVertical(matrix[i], matrix[i + 1]);
+        result += intersectHorizontal(matrix[i]);
+    }
+
+    return result;
+}
