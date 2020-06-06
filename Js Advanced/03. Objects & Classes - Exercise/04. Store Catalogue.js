@@ -1,30 +1,25 @@
-function solve(input){
-    let products = {};
+function storeCatelogue(input) {
+    let res = {};
 
-    for (const line of input) {
-        let [name, price] = line.split(' : ');
+    for (const el of input) {
+        const [name, price] = el.split(' : ');
+        const letter = name[0];
 
-        let productFirstLetter = name[0];
-        if (!products.hasOwnProperty(productFirstLetter)) {
-            products[productFirstLetter] = [];
+        if (!res.hasOwnProperty(letter)) {
+            res[letter] = [];
         }
 
-        let product = {
-            name: name,
-            price: price
-        }
-
-        products[productFirstLetter].push(product);
+        res[letter].push({ name, price });
     }
-   
-    let keys = Object.keys(products).sort();
 
-    for (const letter of keys) {
+    function print(letter, elements) {
         console.log(letter);
-
-        let sortedProducts = products[letter].sort(function(a, b) {return a.name.localeCompare(b.name)})
-        for (const product of sortedProducts) {
-            console.log(`  ${product.name}: ${product.price}`);
+        for (const el of elements) {
+            console.log(`  ${el.name}: ${el.price}`);
         }
     }
+
+    Object.keys(res).sort().forEach(key => {
+        print(key, res[key].sort((a, b) => a.name.localeCompare(b.name)))
+    });
 }

@@ -1,29 +1,29 @@
 function solve(input) {
-    let systems = {};
+    let res = input.reduce((a, c) => {
+        let [system, component, subcomponent] = c.split(' | ');
 
-    for (const line of input) {
-        let [system, component, subcomponent] = line.split(' | ');
-        
-        if (!systems.hasOwnProperty(system)) {
-            systems[system] = {};
+        if (!a.hasOwnProperty(system)) {
+            a[system] = {};
         }
 
-        if (!systems[system].hasOwnProperty(component)) {
-            systems[system][component] = [];
+        if (!a[system].hasOwnProperty(component)) {
+            a[system][component] = [];
         }
 
-        systems[system][component].push(subcomponent);
-    }
+        a[system][component].push(subcomponent);
 
-    let keys = Object.keys(systems);
+        return a;
+    }, {});
 
-    for (const system of keys) {
+    Object.entries(res).sort((a, b) => {
+        return Object.keys(b[1]).length - Object.keys(a[1]).length || a[0].localeCompare(b[0]);
+    }).forEach(([system, component]) => {
         console.log(system);
-        for (const component in systems[system]) {
-            console.log('|||' + component);
-            for (const subcomponent of systems[system][component]) {
-                console.log('||||||' + subcomponent);
-            }
-        }
-    }
+        Object.entries(component).sort((a, b) => {
+            return b[1].length - a[1].length;
+        }).forEach(([component, subcomponent]) => {
+            console.log('|||' + component)
+            subcomponent.forEach(s => console.log('||||||' + s))
+        })
+    });
 }

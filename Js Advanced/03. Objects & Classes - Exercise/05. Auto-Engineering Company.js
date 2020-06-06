@@ -1,28 +1,31 @@
 function solve(input) {
-    let cars = {};
+    let res = input.reduce((a, c) => {
+        let [brand, model, quantity] = c.split(' | ');
+        quantity = Number(quantity);
 
-    for (const line of input) {
-        let [brand, model, producedCars] = line.split(' | ');
-        producedCars = Number(producedCars);
-
-        if (!cars.hasOwnProperty(brand)) {
-            cars[brand] = {};
+        if (!a.hasOwnProperty(brand)) {
+            a[brand] = {};
         }
 
-        if (!cars[brand].hasOwnProperty(model)) {
-            cars[brand][model] = 0;
-        }
+        if (!a[brand].hasOwnProperty(model)) {
+            a[brand][model] = 0;
+        };
 
-        cars[brand][model] += producedCars;
+        a[brand][model] += quantity;
+
+        return a;
+    }, {});
+
+    function print(brands) {
+        for (const brand in brands) {
+            console.log(brand);
+            let models = brands[brand];
+
+            for (const model in models) {
+                console.log(`###${model} -> ${models[model]}`);
+            }
+        }
     }
 
-    let keys = Object.keys(cars);
-    
-    for (const brand of keys) {
-        console.log(brand);
-
-        for (const model in cars[brand]) {
-            console.log(`###${model} -> ${cars[brand][model]}`);
-        }
-    }
+    print(res);
 }

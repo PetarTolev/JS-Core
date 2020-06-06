@@ -1,26 +1,27 @@
-function solve(input){
-    let juices = {};
-    let bottles = {};
+function calcBottles(input) {
+    let res = {};
 
-    for (const line of input) {
-        let [name, quantity] = line.split(' => ');
+    input.reduce((a, c) => {
+        let [fruit, quantity] = c.split(' => ');
+        quantity = Number(quantity);
 
-        if (!juices.hasOwnProperty(name)) {
-            juices[name] = 0;
+        if (!a.hasOwnProperty(fruit)) {
+            a[fruit] = 0;
+        }
+        a[fruit] += quantity;
+
+        if (a[fruit] / 1000 >= 1) {
+            res[fruit] = parseInt(a[fruit] / 1000);
         }
 
-        juices[name] += Number(quantity);
-        let currentQuantity = juices[name];
+        return a;
+    }, {});
 
-        if (currentQuantity >= 1000) {
-            bottles[name] = Math.trunc(currentQuantity / 1000);
+    function print(bottles) {
+        for (const bottle in bottles) {
+            console.log(`${bottle} => ${bottles[bottle]}`);
         }
     }
 
-    let keys = Object.keys(bottles);
-    for (const name of keys) {
-        let quantity = bottles[name];
-
-        console.log(`${name} => ${quantity}`);
-    }
+    print(res);
 }
