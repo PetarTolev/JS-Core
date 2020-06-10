@@ -1,22 +1,32 @@
 function createArticle() {
-	let title = document.getElementById("createTitle").value;
-	let text = document.getElementById("createContent").value;
-	let articlesList = document.getElementById("articles");
+    function clearFields(...fields) {
+        fields.forEach(f => f.value = '');
+    }
 
-	if (title !== "" && text !== "") {
-		let h3 = document.createElement('h3');
-		h3.textContent = title;
+    function createElementWithContent(element, content) {
+        let e = document.createElement(element);
+        e.textContent = content;
+        return e;
+    }
 
-		let p = document.createElement('p');
-		p.textContent = text;
+    let title = document.querySelector('#createTitle');
+    let content = document.querySelector('#createContent');
 
-		let article = document.createElement('article');
-		article.appendChild(h3);
-		article.appendChild(p);
+    if (title.value === '' || content.value === '') {
+        return;
+    }
 
-		articlesList.appendChild(article);
-	}
+    let articleEl = document.createElement('article');
 
-	document.getElementById("createTitle").value = "";
-	document.getElementById("createContent").value = "";
+    let h3El = createElementWithContent('h3', title.value);
+    articleEl.appendChild(h3El);
+
+    let pEl = createElementWithContent('p', content.value);
+    articleEl.appendChild(pEl);
+
+    let articlesEl = document.querySelector('#articles');
+
+    articlesEl.appendChild(articleEl);
+
+    clearFields(title, content);
 }
