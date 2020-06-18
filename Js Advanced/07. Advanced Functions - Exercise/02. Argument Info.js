@@ -1,22 +1,17 @@
-function result(...params) {
-    let result = {};
+function solve(...params) {
+    let types = {};
 
-    for (const param of params) {
-        let typeOfParam = typeof param;
-
-        if (!result.hasOwnProperty(typeOfParam)) {
-            result[typeOfParam] = 0; 
+    for (const a of params) {
+        let type = typeof(a);
+        if (!types.hasOwnProperty(type)) {
+            types[type] = 0;
         }
 
-        result[typeOfParam]++;
-
-        console.log(`${typeof(param)}: ${param}`);
+        types[type] += 1;
+        console.log(`${type}: ${a}`);
     }
 
-    Object.entries(result)
-    .sort((a, b) => b[1] - a[1])
-    .map(([type, count]) => `${type} = ${count}`)
-    .forEach(element => {
-        console.log(element);
-    });
+    Object.entries(types)
+        .sort((a, b) => b[1] - a[1])
+        .map(e => console.log(`${e[0]} = ${e[1]}`));
 }
