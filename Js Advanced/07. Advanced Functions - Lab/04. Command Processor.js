@@ -1,10 +1,10 @@
 function solution() {
-    let myString = '';
+    let string = '';
 
     return {
-        append: (str) => {myString += str},
-        removeStart: (n) => {myString = myString.slice(n)},
-        removeEnd: (n) => {myString = myString.slice(0,myString.length - n)},
-        print: () => console.log(myString)
-    }
+        append: value => string += value,
+        removeStart: n => string = string.slice(n),
+        removeEnd: n => string = string.slice(0, string.length - n),
+        print: () => console.log(string)
+    };
 }
