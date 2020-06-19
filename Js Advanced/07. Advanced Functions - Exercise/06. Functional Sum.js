@@ -1,7 +1,9 @@
-function add(num1) {
-    return (num2) => {
-        return (num3) => {
-            return num1 + num2 + num3;
-        }
+function add(n) {
+    function sum(n1) {
+        n += n1;
+        return sum;
     }
+
+    sum.toString = () => n;
+    return sum;
 }
