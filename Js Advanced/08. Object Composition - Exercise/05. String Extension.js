@@ -29,6 +29,8 @@
     }
 
     String.format = function(str, ...params) {
-        return 0;
+        return str.match(/\{\d\}/g).reduce((acc, curr, index) => {
+            return acc.replace(curr, params[index] ? params[index] : curr);
+        }, str);
     }
 })();
