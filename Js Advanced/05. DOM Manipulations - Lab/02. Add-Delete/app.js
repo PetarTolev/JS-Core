@@ -1,35 +1,32 @@
 function addItem() {
-    let inputContent = document.getElementById('newText').value;
-    let list = document.getElementById('items');
+    let input = document.querySelector('#newText');
+    let items = document.querySelector('#items');
 
-    if (inputContent === null || list === null) {
-        throw new Error('missing dom elements');
+    if (input.value === '') {
+        return;
     }
 
-    addElement(list, createElement('li', inputContent));
-}
+    let li = createElement('li', input.value)
+    let a = createElement('a', '[Delete]', { href: '#' });
+    a.addEventListener('click', (e) => {
+        e.currentTarget.parentNode.remove();
+    });
 
-function addDeleteButton(element) {
-    let a = document.createElement('a');
-    a.setAttribute('href', '#');
-    a.
-    a.appendChild(document.createTextNode('[Delete]'));
-    element.appendChild(a);    
+    li.appendChild(a);
+    items.appendChild(li);
 
-    return element;
-}
+    input.value = '';
 
-function createElement(type, content) {
-    let element = document.createElement(type);
-    element.innerHTML = content;
-    addDeleteButton(element);
+    function createElement(tag, content, attributes) {
+        let element = document.createElement(tag);
+        element.innerHTML = content;
 
-    return element;
-}
+        if (attributes) {
+            for (const [name, value] of Object.entries(attributes)) {
+                element.setAttribute(name, value);
+            }
+        }
 
-function addElement(list,  element) {
-    if (element.innerHTML === "") {
-        throw new Error('cannot add empty elements')
+        return element;
     }
-    list.appendChild(element)
 }

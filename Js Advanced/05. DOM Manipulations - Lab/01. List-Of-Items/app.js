@@ -1,23 +1,18 @@
 function addItem() {
-    let inputContent = document.getElementById('newItemText').value;
-    let list = document.getElementById('items');
+    let input = document.querySelector('#newItemText');
+    let items = document.querySelector('#items');
 
-    if (inputContent === null || list === null) {
-        throw new Error('missing dom elements');
+    if (input.value === '') {
+        return;
     }
 
-    addElement(list, createElement('li', inputContent));
-}
+    items.appendChild(createElement('li', input.value));
 
-function createElement(type, content) {
-    let element = document.createElement(type);
-    element.innerHTML = content
-    return element;
-}
+    input.value = '';
 
-function addElement(list,  element) {
-    if (element.innerHTML === "") {
-        throw new Error('cannot add empty elements')
+    function createElement(tag, content) {
+        let element = document.createElement(tag);
+        element.innerHTML = content;
+        return element;
     }
-    list.appendChild(element)
 }
