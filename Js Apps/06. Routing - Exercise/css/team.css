@@ -1,0 +1,39 @@
+.teams {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.team-box {
+    flex-grow: 1;
+    margin: 1%;
+    width: 30%;
+    min-width: 120px;
+    max-width: 30%;
+    border: 3px solid antiquewhite;
+    text-decoration: none;
+    color: black;
+}
+
+.team-box:hover {
+    border: 3px solid black;
+    text-decoration: none;
+    color: black;
+}
+
+.spanner {
+    display: block;
+    padding: 0.25em;
+    background-color: antiquewhite;
+}
+
+.title {
+    font-size: 1.5em;
+    display: block;
+    padding: 0.25em;
+    font-weight: 600;
+}
+
+.team-box p {
+    margin: 1.5em;
+}
