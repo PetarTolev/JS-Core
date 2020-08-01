@@ -20,7 +20,6 @@ export async function loginPost() {
             throw error;
         }
 
-        this.app.userData.isLoggedIn = true;
         this.app.userData.username = result.username;
         localStorage.setItem('userToken', result['user-token']);
         localStorage.setItem('username', result.username);
@@ -56,7 +55,6 @@ export async function registerPost() {
             throw error;
         }
 
-        this.app.userData.isLoggedIn = true;
         this.app.userData.username = result.username;
         localStorage.setItem('userToken', result['user-token']);
         localStorage.setItem('username', result.username);
@@ -72,7 +70,6 @@ export async function registerPost() {
 export async function logoutGet() {
     await logout();
 
-    this.app.userData.isLoggedIn = false;
     this.app.userData.username = undefined;
     localStorage.removeItem('userToken');
     localStorage.removeItem('username');

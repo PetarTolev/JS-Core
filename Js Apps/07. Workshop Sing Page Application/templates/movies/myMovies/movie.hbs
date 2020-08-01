@@ -4,9 +4,9 @@
         src="{{movie.image}}">
     <p>Available Tickets: {{movie.ticketsCount}}</p>
     <div class="btn-group">
-        <button><a href="#">Edit</a></button>
-        <button><a href="#">Delete</a></button>
-        <button><a href="#">Buy Ticket</a></button>
-        <button><a href="#">Details</a></button>
+        <button><a href="#/edit/{{movie.objectId}}">Edit</a></button>
+        <button><a href="#/delete/{{movie.objectId}}">Delete</a></button>
+        <button><a href="#/buyTicket/{{movie.objectId}}">Buy Ticket</a></button>
+        <button><a href="#/details/{{movie.objectId}}">Details</a></button>
     </div>
 </div>

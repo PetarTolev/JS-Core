@@ -74,6 +74,8 @@ export async function createMovie(title, image, description, genres, ticketsCoun
         })
     })).json();
 
+
+    //extract function 
     if (result.hasOwnProperty('errorData')) {
         const error = new Error();
         Object.assign(error, result);
@@ -98,12 +100,23 @@ export async function getMyMovies() {
     return (await fetch(host(endpoints.MOVIES + `?where=ownerId%20%3D%20%27${userId}%27`))).json();
 }
 
-export async function editMovie() {
+export async function deleteMovie(id) {
+    const token = getToken();
 
-}
+    const result = (await fetch(host(endpoints.MOVIES + `/${id}`), {
+        method: 'DELETE',
+        headers: {
+            'user-token': token
+        }
+    })).json();
 
-export async function deleteMovie() {
+    if (result.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, result);
+        throw error;
+    }
 
+    return result;
 }
 
 export async function updateMovie(movie) {
@@ -129,4 +142,14 @@ export async function updateMovie(movie) {
     }
 
     return result;
+}
+
+function getToken() {
+    const token = localStorage.getItem('userToken');
+
+    if (!token) {
+        throw new Error('User is not logged in!');
+    }
+
+    return token;
 }
