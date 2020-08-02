@@ -1,4 +1,5 @@
 import { getMovies, getMyMovies, createMovie, getMovieById, updateMovie, deleteMovie as deleteMovieGet } from '../data.js'
+import { beginRequest, endRequest, showInfo, showError } from '../notifications.js'
 
 export async function cinema() {
     this.partials = {
@@ -29,6 +30,10 @@ export async function addMoviePost() {
     const { title, imageUrl, description, genres, tickets } = this.params;
 
     try {
+        //validation
+
+        beginRequest();
+
         const result = await createMovie(title, imageUrl, description, genres, tickets, '');
 
         if (result.hasOwnProperty('errorData')) {
@@ -37,10 +42,13 @@ export async function addMoviePost() {
             throw error;
         }
 
+        endRequest();
+        showInfo('Movie created successfully!');
+
         this.redirect('/');
     } catch (err) {
         console.error(err);
-        alert(err.message);
+        showError(err.message)
     }
 }
 

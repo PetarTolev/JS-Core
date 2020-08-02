@@ -1,4 +1,5 @@
 import { login, register, logout } from '../data.js'
+import { showInfo, showError, beginRequest, endRequest } from '../notifications.js'
 
 export async function loginGet() {
     this.partials = {
@@ -21,13 +22,17 @@ export async function loginPost() {
         }
 
         this.app.userData.username = result.username;
+        this.app.userData.userId = result.objectId;
         localStorage.setItem('userToken', result['user-token']);
         localStorage.setItem('username', result.username);
         localStorage.setItem('userId', result.objectId);
+
+        showInfo(`Logged in as ${result.username}!`);
+
         this.redirect('#/home');
     } catch (err) {
         console.error(err);
-        alert(err.message);
+        showError(err.message);
     }
 }
 
@@ -42,12 +47,17 @@ export async function registerGet() {
 }
 
 export async function registerPost() {
-    if (this.params.password !== this.params.repeatPassword) {
-        alert("Password don't match");
-        return;
-    }
-
     try {
+        if (this.params.password !== this.params.repeatPassword) {
+            throw new Error('Password don\'t match');
+        }
+        if (this.params.username.length < 3) {
+            throw new Error('Username must be at least 3 characters long');
+        }
+        if (this.params.password.length < 6) {
+            throw new Error('Password must be at least 6 characters long');
+        }
+
         const result = await register(this.params.username, this.params.password);
         if (result.hasOwnProperty('errorData')) {
             const error = new Error();
@@ -60,20 +70,35 @@ export async function registerPost() {
         localStorage.setItem('username', result.username);
         localStorage.setItem('userId', result.objectId);
 
+        showInfo('Successfully registered!');
+
         this.redirect('#/home');
     } catch (err) {
         console.error(err);
-        alert(err.message);
+        showError(err.message);
     }
 }
 
 export async function logoutGet() {
-    await logout();
+    try {
+        const result = await logout();
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw error;
+        }
 
-    this.app.userData.username = undefined;
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('username');
-    localStorage.removeItem('userId');
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        this.app.userData.username = '';
+        this.app.userData.userId = '';
 
-    this.redirect('#/home');
+        showInfo('Successfully logged out');
+
+        this.redirect('#/home');
+    } catch (err) {
+        console.error(err);
+        showError(err.message);
+    }
 }
