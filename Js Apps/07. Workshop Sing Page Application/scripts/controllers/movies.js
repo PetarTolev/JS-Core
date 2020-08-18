@@ -11,7 +11,7 @@ export async function cinema() {
 
     Handlebars.registerPartial('movie', this.partials.movie);
 
-    Object.assign(this.app.userData, { movies: await getMovies() })
+    Object.assign(this.app.userData, { movies: await getMovies() }) //add search to getMovies
 
     this.partial('./templates/home/home.hbs', this.app.userData);
 }

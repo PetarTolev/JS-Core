@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row bg-light text-dark">
+        <h1>Movie title: {{movie.title}}</h1>
+
+        <div class="col-md-8">
+            <img class="img-thumbnail" src="{{movie.image}}" alt="Movie">
+        </div>
+        <div class="col-md-4 text-center">
+            <h3 class="my-3 ">Movie Description</h3>
+            <p>{{movie.description}}</p>
+            {{#if isCreator}}
+                <a class="btn btn-danger" href="#/delete/{{movie.objectId}}">Delete</a>
+                <a class="btn btn-warning" href="#/edit/{{movie.objectId}}">Edit</a>
+            {{else}}
+                <a class="btn btn-primary" href="#/like/{{movie.objectId}}">Like</a>
+                {{#if isLiked}}
+                    <span class="enrolled-span">Liked {{movie.likes}}</span>
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</div>
