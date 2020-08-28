@@ -1,0 +1,21 @@
+{{#if email}}
+<div class="shoes">
+    {{#if hasShoes}}
+        {{> shoes}}
+    {{else}}
+        <h1>No shoes to display. Be the first to create a new offer...</h1>
+    {{/if}}
+</div>
+{{else}}
+<div class="container">
+    <div class="about-us">
+        <div>
+            <img src="./public/shoes.jpg" alt="">
+            <img src="./public/shoes2.jpg" alt="">
+        </div>
+        <p>
+            <a href="#/register">Register Now</a> and Try it!
+        </p>
+    </div>
+</div>
+{{/if}}
